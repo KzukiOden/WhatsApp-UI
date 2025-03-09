@@ -77,7 +77,10 @@ class Onboarding extends StatelessWidget {
         callback: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
+            MaterialPageRoute(
+              fullscreenDialog: true,
+              builder: (context) => LoginScreen(),
+            ),
           );
         },
         buttonname: 'Agree and continue',
