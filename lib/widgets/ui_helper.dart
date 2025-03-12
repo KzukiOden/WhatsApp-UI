@@ -41,4 +41,22 @@ class UiHelper {
       ),
     );
   }
+
+  static optContainers(TextEditingController controllerForOPT) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xffD9D9D9),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 14.0, left: 15),
+        child: TextField(
+          controller: controllerForOPT,
+          decoration: InputDecoration(border: InputBorder.none),
+        ),
+      ),
+    );
+  }
 }

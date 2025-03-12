@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
           //   context,
           //   MaterialPageRoute(builder: (context) => VerifyPage()),
           // );
+          login(phoneController.text.toString());
         },
         buttonname: 'Next',
       ),
@@ -167,14 +168,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // login logic for OTP
   login(String phonenumber) {
-    if (phonenumber == "") {
-      return ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Enter Your Phone Number')));
+    if (phonenumber.isEmpty) {
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Enter Your Phone Number'),
+          backgroundColor: Color(0xff00A884),
+        ),
+      );
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => VerifyPage()),
+        MaterialPageRoute(
+          builder:
+              (context) => VerifyPage(
+                phonenumber: phonenumber,
+                opt1Controller: TextEditingController(),
+                opt2Controller: TextEditingController(),
+                opt3Controller: TextEditingController(),
+                opt4Controller: TextEditingController(),
+                opt5Controller: TextEditingController(),
+                opt6Controller: TextEditingController(),
+              ),
+        ),
       );
     }
   }
