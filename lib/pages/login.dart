@@ -3,7 +3,7 @@ import 'package:whats_app_series/pages/verify_page.dart';
 import 'package:whats_app_series/widgets/ui_helper.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -11,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String? selectedCountry;
+  TextEditingController phoneController = TextEditingController();
   List<String> country = [
     "America",
     "Africa",
@@ -57,10 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       floatingActionButton: UiHelper.customButton(
         callback: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VerifyPage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => VerifyPage()),
+          // );
         },
         buttonname: 'Next',
       ),
@@ -102,19 +103,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildCountryDropdown() {
-    return Container(
+    return SizedBox(
       width: 200,
       child: DropdownButtonFormField(
         items:
             country.map((String countries) {
               return DropdownMenuItem(
-                child: Text(countries.toString()),
                 value: countries,
+                child: Text(countries.toString()),
               );
             }).toList(),
         onChanged: (value) {
           setState(() {
-            selectedCountry = value as String?;
+            selectedCountry = value;
           });
         },
         value: selectedCountry,
@@ -149,6 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SizedBox(
             width: 200,
             child: TextField(
+              controller: phoneController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '',
@@ -161,5 +163,19 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ],
     );
+  }
+
+  // login logic for OTP
+  login(String phonenumber) {
+    if (phonenumber == "") {
+      return ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Enter Your Phone Number')));
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => VerifyPage()),
+      );
+    }
   }
 }
