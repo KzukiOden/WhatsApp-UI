@@ -149,13 +149,28 @@ class _ProfilePageState extends State<ProfilePage> {
         onTap: () {
           _pickPicture(context);
         },
-        child:widget.pickImage == null ? CircleAvatar(
-          backgroundColor: Color(0xffD9D9D9),
+        child: CircleAvatar(
+          backgroundColor: const Color(0xffD9D9D9),
           radius: 65,
-          child: ClipOval(child: Image.asset('assets/images/camera.png')),
-        ):CircleAvatar(
-          backgroundImage: FileImage(widget.pickImage!),
-        )
+          child:
+              widget.pickImage == null
+                  ? ClipOval(
+                    child: Image.asset(
+                      'assets/images/camera.png',
+                      fit: BoxFit.cover,
+                      width: 130,
+                      height: 130,
+                    ),
+                  )
+                  : ClipOval(
+                    child: Image.file(
+                      widget.pickImage!,
+                      fit: BoxFit.cover,
+                      width: 130,
+                      height: 130,
+                    ),
+                  ),
+        ),
       ),
     );
   }
